@@ -50,7 +50,7 @@ jobs:
           envs: GITHUB_USERNAME, GITHUB_TOKEN
           script: |
             docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
-            docker pull ghcr.io/Webber-Lights/webberlights.com/webberlights:latest
+            docker pull ghcr.io/webber-lights/webberlights.com/webberlights:latest
             docker stop webberlights
             docker system prune -f
-            docker run --name webberlights -dit -p 3000:3000 ghcr.io/Webber-Lights/webberlights.com/webberlights:latest
+            docker run --name webberlights -dit -p 3000:3000 ghcr.io/webber-lights/webberlights.com/webberlights:latest
