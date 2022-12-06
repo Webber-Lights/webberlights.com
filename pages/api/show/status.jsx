@@ -1,7 +1,7 @@
 import cleanSequence from "utils/cleanSequence";
 
 export async function getFPPStatus() {
-  const fpp = await fetch('http://10.10.0.20/api/fppd/status');
+  const fpp = await fetch(`${process.env.FPP_URL}/api/fppd/status`);
   const status = await fpp.json();
   let songInfo = cleanSequence(status.current_sequence)
 
