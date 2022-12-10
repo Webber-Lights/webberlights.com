@@ -5,6 +5,9 @@ import Snowfall from 'react-snowfall'
 import SEO from './seo'
 
 function Layout({ children }) {
+  if (typeof document === 'undefined') {
+    React.useLayoutEffect = React.useEffect;
+  }  
   return (
     <div className="scrollbar-hide overflow-y-scroll">
       <SEO />
