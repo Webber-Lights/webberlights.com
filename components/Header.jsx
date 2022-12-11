@@ -36,8 +36,8 @@ const Header = () => {
       active: true,
     },
     {
-      label: 'Contact',
-      url: "/contact",
+      label: 'Donate',
+      url: "https://paypal.me/xcraftman52?country.x=US&locale.x=en_US",
       active: false,
     },
   ];

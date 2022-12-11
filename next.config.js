@@ -13,6 +13,15 @@ const nextConfig = {
   //   appDir: true,
   // },
   output: 'standalone',
+  async redirects() {
+    return [
+      {
+        source: '/donate',
+        destination: 'https://paypal.me/xcraftman52?country.x=US&locale.x=en_US',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = withContentlayer(nextConfig)
