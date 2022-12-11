@@ -24,21 +24,18 @@ const Article = defineDocumentType(() => ({
         },
         image: { type: 'string', required: true },
     },
-    computedFields,
-}));
-const computedFields = {
-    readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
-    wordCount: {
+    computedFields: {
+        readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
+        wordCount: {
         type: 'number',
         resolve: (doc) => doc.body.raw.split(/\s+/gu).length,
     },
-    slug: {
+        slug: {
         type: 'string',
         resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ''),
-    },
-};
-const contentLayerConfig = makeSource({
+    }
+}}));
+export default makeSource({
     contentDirPath: 'data/blog',
     documentTypes: [Article],
 });
-export default contentLayerConfig;
