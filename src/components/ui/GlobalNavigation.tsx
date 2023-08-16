@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 
-import NavLogo from "public/assets/images/WL_Logo.png";
+import NavLogo from "../../../public/assets/images/WL_Logo.png";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
