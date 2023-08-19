@@ -3,6 +3,7 @@
 const { withContentlayer } = require("next-contentlayer");
 
 const nextConfig = {
+  output: "standalone",
   reactStrictMode: true,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -21,7 +22,6 @@ const nextConfig = {
   // experimental: {
   //   appDir: true,
   // },
-  output: "standalone",
   // async redirects() {
   //   return [
   //     {
