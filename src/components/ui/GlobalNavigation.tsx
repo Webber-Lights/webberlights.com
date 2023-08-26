@@ -131,7 +131,7 @@ const Header = () => {
             <div className='border-b border-gray-300 my-4'></div>
           </div>
           <div className='py-2 flex flex-col'>
-            <ul className=''>
+            <div className=''>
               {MenuItems.map((item, index) => {
                 return (
                   <Link href={item.url} key={index}>
@@ -148,7 +148,7 @@ const Header = () => {
                   </Link>
                 );
               })}
-            </ul>
+            </div>
           </div>
         </div>
       </div>
