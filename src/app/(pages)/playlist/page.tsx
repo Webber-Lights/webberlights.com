@@ -3,13 +3,13 @@ import SubBanner from "@/components/ui/SubBanner";
 import { cleanSequence } from "@/utils/FPPUtils";
 
 const getFppStatus = async () => {
-  const res = await fetch("http://100.40.114.217/api/fppd/status", {
+  const res = await fetch("http://100.96.223.4/api/fppd/status", {
     cache: "no-store",
   });
   return res.json();
 };
 const getFppPlaylist = async () => {
-  const res = await fetch("http://100.40.114.217/api/playlist/Show", {
+  const res = await fetch("http://100.96.223.4/api/playlist/Show", {
     cache: "no-store",
   });
   return res.json();
