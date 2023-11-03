@@ -1,7 +1,5 @@
 name: Build and Deploy
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: [master]
@@ -10,19 +8,18 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
       - name: Tailscale
         uses: tailscale/github-action@v2
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
+
       - name: Build and Publish to Github Packages Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
@@ -31,33 +28,15 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets. GITHUB_TOKEN }}
           dockerfile: Dockerfile
-          buildargs: FPP_URL,
+          # buildargs: FPP_URL,
           tags: latest
 
       - name: Deploy package to VPS
         run: |
           ssh -o StrictHostKeyChecking=no xcraftman52@washington "
-            cd /home/$GITHUB_USERNAME/docker
-            docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+            cd /home/xcraftman52/docker
+            docker login ghcr.io -u ${{ secrets.USERNAME }} -p ${{ secrets. GITHUB_TOKEN }}
             docker pull ghcr.io/webber-lights/webberlights.com/webberlights:latest
             docker compose stop webberlights && sudo docker compose rm -f webberlights
             docker system prune -f
             docker compose up webberlights -d "
-        # - name: Deploy package to VPS
-        #     uses: appleboy/ssh-action@master
-        #     env:
-        #       GITHUB_USERNAME: ${{ secrets.USERNAME }}
-        #       GITHUB_TOKEN: ${{ secrets. GITHUB_TOKEN }}
-        #     with:
-        #       host: ${{ secrets.DEPLOY_HOST }}
-        #       port: ${{ secrets.DEPLOY_PORT }}
-        #       username: ${{ secrets.DEPLOY_USER }}
-        #       key: ${{ secrets.DEPLOY_KEY }}
-        #       envs: GITHUB_USERNAME, GITHUB_TOKEN
-        #       script: |
-        #         cd /home/$GITHUB_USERNAME/docker
-        #         docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
-        #         docker pull ghcr.io/webber-lights/webberlights.com/webberlights:latest
-        #         docker compose stop webberlights && sudo docker compose rm -f webberlights
-        #         docker system prune -f
-        #         docker compose up webberlights -d
