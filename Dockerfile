@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json pnpm-lock.yaml ./
-RUN yarn global add pnpm && pnpm i --frozen-lockfile
+RUN yarn global add pnpm && pnpm i --frozen-lockfile --ignore-engines
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
