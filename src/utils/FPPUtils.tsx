@@ -1,4 +1,7 @@
 export async function cleanSequence(sequence) {
+    if (!sequence) {
+    return { song: "Unknown", artist: "Unknown" };
+  }
   let sequenceWithoutFilename = sequence.replace(/\.[^/.]+$/, "");
   let song = sequenceWithoutFilename;
   let artist = "";
