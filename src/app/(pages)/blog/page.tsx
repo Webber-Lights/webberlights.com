@@ -1,36 +1,36 @@
 import React from "react";
-import { allArticles } from "contentlayer/generated";
-import { select } from "@/utils/select";
-import ArticleCard from "./ArticleCard";
+// import { allArticles } from "contentlayer/generated";
+// import { select } from "@/utils/select";
+// import ArticleCard from "./ArticleCard";
 import SubBanner from "@/components/ui/SubBanner";
 
 export default async function Page() {
-  const getArticles = allArticles
-    .map((article) =>
-      select(article, [
-        "slug",
-        "title",
-        "description",
-        "publishedAt",
-        "readingTime",
-        "author",
-        "category",
-        "image",
-      ])
-    )
-    .sort(
-      (a, b) =>
-        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
-    );
+  // const getArticles = allArticles
+  //   .map((article) =>
+  //     select(article, [
+  //       "slug",
+  //       "title",
+  //       "description",
+  //       "publishedAt",
+  //       "readingTime",
+  //       "author",
+  //       "category",
+  //       "image",
+  //     ])
+  //   )
+  //   .sort(
+  //     (a, b) =>
+  //       Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
+  //   );
 
-  const [articles] = await Promise.all([getArticles]);
+  // const [articles] = await Promise.all([getArticles]);
 
   return (
     <div>
       <SubBanner title='Blog' subtitle='Blog Posts about Webber Lights' />
       <div className='justify-center items-center lg:mx-40 mx-10'>
         <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>
-          {articles.map(
+          {/* {articles.map(
             ({
               title,
               description,
@@ -51,7 +51,7 @@ export default async function Page() {
                 readingTime={readingTime.text}
               />
             )
-          )}
+          )} */}
         </div>
       </div>
     </div>
