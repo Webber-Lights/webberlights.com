@@ -1,11 +1,18 @@
+import Image from "next/image";
 import React from "react";
 
 function MainBanner() {
   return (
     <div
-      className=" w-full h-screen bg-cover bg-center bg-no-repeat text-center"
-      style={{ backgroundImage: "url('/assets/images/2022_Show_Rainbow.jpg')" }}
-    >
+      className=" w-full h-screen bg-cover bg-center bg-no-repeat text-center">
+       <Image
+        src="/assets/images/2022_Show_Rainbow.jpg"
+        alt="Christmas light display"
+        fill
+        priority
+        quality={90}
+        className="object-cover object-center"
+      />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50"></div>
 

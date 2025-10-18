@@ -12,7 +12,7 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [new URL('https://lucaswebber.dev')],
-
+    qualities: [90],
     dangerouslyAllowSVG: true,
   },
   // ONLY FOR DEVELOPMENT
