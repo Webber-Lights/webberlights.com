@@ -11,11 +11,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: [
-      "images.unsplash.com",
-      "lucaswebber.dev",
-      "https://media-exp1.licdn.com",
-    ],
+    remotePatterns: [new URL('https://lucaswebber.dev')],
+
     dangerouslyAllowSVG: true,
   },
   // ONLY FOR DEVELOPMENT
