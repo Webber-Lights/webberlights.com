@@ -1,16 +1,26 @@
 import { cleanSequence } from "@/utils/FPPUtils";
+import { getFppStatus } from "@/lib/fpp";
 import React from "react";
 
-export default async function ShowStatus({ fppStatus }) {
+export default async function ShowStatus() {
+  const fppStatus = await getFppStatus();
+  
   let song = "";
   let artist = "";
-  let isPlaying: boolean = false;
-  if (fppStatus.status_name == "playing") {
+  let isPlaying = false;
+
+  if (fppStatus?.status_name === "playing" && fppStatus?.current_sequence) {
     isPlaying = true;
-    let seq = await cleanSequence(fppStatus.current_sequence);
-    song = seq.song;
-    artist = seq.artist;
+    try {
+      let seq = await cleanSequence(fppStatus.current_sequence);
+      song = seq.song;
+      artist = seq.artist;
+    } catch (error) {
+      console.error("Error cleaning sequence:", error);
+      isPlaying = false;
+    }
   }
+
   return (
     <section className='flex flex-col p-2 justify-center items-center max-w-auto'>
       <div>
