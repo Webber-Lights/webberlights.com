@@ -35,7 +35,28 @@ const Article = defineDocumentType(() => ({
         resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ''),
     }
 }}));
+
+const TimelineYear = defineDocumentType(() => ({
+  name: 'TimelineYear',
+  filePathPattern: 'data/timeline/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },      
+    year: { type: 'number', required: true },         
+    theme: { type: 'string', required: true },       
+    featuredImage: { type: 'string', required: false },
+    totalLights: { type: 'number', required: false },
+    totalSongs: { type: 'number', required: false },   
+    notes: { type: 'string', required: false },
+  },
+  computedFields: {
+    slug: { 
+      type: 'string', 
+      resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ''),
+    },
+  },
+}));
 export default makeSource({
-    contentDirPath: 'data/blog',
-    documentTypes: [Article],
+    contentDirPath: 'data',
+    documentTypes: [Article, TimelineYear],
 });
