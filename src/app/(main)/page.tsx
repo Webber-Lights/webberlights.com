@@ -1,6 +1,6 @@
 import About from "./About";
 import ShowStatus from "./ShowStatus";
-import ShowStatusSkeleton from "@/components/ShowStatusSkeleton";
+import ShowStatusSkeleton from "./ShowStatusSkeleton";
 import { Suspense } from "react";
 
 

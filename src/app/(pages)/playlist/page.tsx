@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import SubBanner from "@/components/ui/SubBanner";
-import PlaylistTableWrapper from "@/components/PlaylistTableWrapper";
-import PlaylistTableSkeleton from "@/components/PlaylistTableSkeleton";
+import PlaylistTableWrapper from "./PlaylistTableWrapper";
+import PlaylistTableSkeleton from "./PlaylistTableSkeleton";
 
 export default function Page() {
   return (
