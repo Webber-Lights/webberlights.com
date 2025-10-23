@@ -13,6 +13,7 @@ function Layout() {
           position: "fixed",
           width: "100vw",
           height: "100vh",
+          zIndex: 99999,
         }}
         snowflakeCount={250}
       />
