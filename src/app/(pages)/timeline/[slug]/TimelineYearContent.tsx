@@ -1,9 +1,9 @@
 // components/TimelineMDX.tsx
 "use client";
 
-import { useMDXComponent } from "next-contentlayer/hooks";
+import { useMDXComponent } from "next-contentlayer2/hooks";
 import Link from "next/link";
-import { YouTubeEmbed } from '@next/third-parties/google'
+import { YouTubeEmbed as RawYouTubeEmbed } from '@next/third-parties/google'
 
 
 interface TimelineMDXProps {
@@ -15,7 +15,7 @@ const mdxComponents = {
   YouTubeEmbed: ({ videoid, height = 300, className, style, ...props }: any) => {
     return (
       <div className={`relative w-[400px] mt-4 ${className ?? ""}`} style={{ paddingBottom: height ? undefined : "56.25%" }}>
-        <YouTubeEmbed
+        <RawYouTubeEmbed
           videoid={videoid}
         />
       </div>
