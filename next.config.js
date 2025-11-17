@@ -6,11 +6,7 @@ const { withContentlayer } = require("next-contentlayer");
 const nextConfig = {
   output: "standalone",
   reactStrictMode: true,
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
+  turbopack: {},
   images: {
     remotePatterns: [new URL('https://lucaswebber.dev')],
     qualities: [90],
