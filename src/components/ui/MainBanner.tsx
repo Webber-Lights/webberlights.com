@@ -4,7 +4,7 @@ import React from "react";
 function MainBanner() {
   return (
     <div
-      className=" w-full h-screen bg-cover bg-center bg-no-repeat text-center">
+      className="relative w-full h-150 bg-cover bg-center bg-no-repeat text-center">
        <Image
         src="/assets/images/2022_Show_Rainbow.jpg"
         alt="Christmas light display"
@@ -24,14 +24,14 @@ function MainBanner() {
         </p>
       </div>
 
-      {/* Quote */}
-      <div className="relative z-10 text-2xl font-extrabold pb-20 text-red-500 bottom-20 md:bottom-40 px-4">
+      {/* Quote
+      <div className="fixed bottom-0z-10 text-2xl font-extrabold pb-20 text-red-500  px-4">
         <p>
           &ldquo;Christmas isn&apos;t about candy canes, or lights all aglow,
           it&apos;s the hearts that we touch, and the care that we show.&ldquo;
         </p>
         <p>- Unknown</p>
-      </div>
+      </div> */}
     </div>
   );
 }
