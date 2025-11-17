@@ -1,3 +1,5 @@
+const FPP_URL = process.env.FPP_URL || "http://10.32.60.10";
+
 const fallbackStatus = {
   status_name: "idle",
   current_sequence: null,
@@ -18,7 +20,7 @@ export async function getFppStatus() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 1000);
 
-    const res = await fetch("http://100.117.192.60/api/fppd/status", {
+    const res = await fetch(`${FPP_URL}/api/fppd/status`, {
       cache: "no-store",
       signal: controller.signal,
     });
@@ -42,7 +44,7 @@ export async function getFppPlaylist() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 1000);
 
-    const res = await fetch("http://100.117.192.60/api/playlist/Show", {
+    const res = await fetch(`${FPP_URL}/api/playlist/Show`, {
       cache: "no-store",
       signal: controller.signal,
     });
