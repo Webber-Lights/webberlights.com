@@ -24,13 +24,13 @@ const Header = () => {
       active: true,
     },
     {
-      label: "News",
-      url: "/blog",
+      label: "Show Timeline",
+      url: "/timeline",
       active: true,
     },
     {
-      label: "Q & A",
-      url: "/q-a",
+      label: "FAQ",
+      url: "/faq",
       active: true,
     },
     {
