@@ -13,8 +13,15 @@ export default function RootLayout({ children }) {
       </head>
       <body className='text-gray-100 min-h-screen font-inter h-full bg-[#21252B]'>
         <Snowfall />
-        <header>
-          <GlobalNavigation />
+        {process.env.NEXT_PUBLIC_BANNER_ENABLED === 'true' && process.env.NEXT_PUBLIC_BANNER_TEXT !== '' && (
+        <div className="fixed top-0 w-full bg-red-600 text-white py-2 px-4 text-center font-semibold text-sm md:text-base z-[101]">
+          {process.env.NEXT_PUBLIC_BANNER_TEXT}
+      </div>
+        )}
+        {process.env.NEXT_PUBLIC_BANNER_ENABLED === 'true' && <div className="mt-9"></div>}
+        <header className=''>
+               
+          <GlobalNavigation/>
         </header>
         <main className='flex flex-col'>{children}</main>
         <footer>
