@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 interface TimelineYear {
   year: number
@@ -14,20 +15,20 @@ interface TimelineProps {
 
 export function VerticalTimeline({ years }: TimelineProps) {
   return (
-<div className="min-h-screen py-16 px-4">
-      <div className="max-w-4xl mx-auto justify-left">        
-     <div className="relative ">
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-gray-300"></div>
+<div className="min-h-screen py-16 px-2 md:px-4">
+      <div className="max-w-5xl mx-auto">        
+     <div className="relative">
+          <div className="absolute md:left-2/8 left-1/16 transform -translate-x-1/2 w-2 h-full bg-gray-300"></div>
           {years
             .sort((a, b) => b.year - a.year)
             .map((year, index) => (
               <div key={year.slug} className="mb-12 relative">
                 {/* Circle marker */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-red-500 rounded-full z-10 top-6"></div>
+                <div className="absolute md:left-2/8 left-1/16 transform -translate-x-1/2 w-8 h-8 bg-red-500 rounded-full z-10 top-6"></div>
 
                 {/* Content cards */}
-                <div className="flex justify-end w-full">
-                  <div className="w-5/12 pl-8 text-left">
+                <div >
+                  <div className="w-full max-w-2xs md:w-5/12 relative mx-auto">
                     <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
                       <h3 className="text-xl font-bold text-gray-800">
                         {year.year} – {year.theme}
@@ -40,6 +41,11 @@ export function VerticalTimeline({ years }: TimelineProps) {
                         />
                       )}
                       <p className="mt-4 text-gray-600">{year.title}</p>
+                      <Link href={`/timeline/${year.slug}`}>
+                        <span className="mt-4 inline-block text-white font-semibold hover:underline p-2 rounded-xl bg-red-500">
+                          Read More &rarr;
+                        </span>
+                      </Link>
                     </div>
                   </div>
                 </div>

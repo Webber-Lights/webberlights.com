@@ -3,7 +3,7 @@ import React from 'react'
 
 function Footer() {
   return (
-<div className="w-full text-center border-t border-grey p-4 ">
+<div className="w-full text-center border-t border-grey p-4 sticky bottom-0">
 <div className="py-5 text-center">
         {/* Social Icons */}
         <div className="flex justify-center items-center flex-wrap space-x-2">
