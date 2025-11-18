@@ -1,26 +1,8 @@
-// components/TimelineMDX.tsx
-"use client";
-
-import { useMDXComponent } from "next-contentlayer2/hooks";
-import Link from "next/link";
+import type { MDXComponents } from 'mdx/types'
+import Image, { ImageProps } from 'next/image'
 import { YouTubeEmbed as RawYouTubeEmbed } from '@next/third-parties/google'
-
-
-interface TimelineMDXProps {
-  code: string;
-}
-
-const mdxComponents = {
-  Link,
-  YouTubeEmbed: ({ videoid, height = 300, className, style, ...props }: any) => {
-    return (
-      <div className={`relative w-[400px] mt-4 ${className ?? ""}`} style={{ paddingBottom: height ? undefined : "56.25%" }}>
-        <RawYouTubeEmbed
-          videoid={videoid}
-        />
-      </div>
-    );
-  },
+ 
+const components = {
   h1: (props: any) => <h1 className="text-3xl font-bold my-4" {...props} />,
   h2: (props: any) => <h2 className="text-2xl font-semibold my-3" {...props} />,
   h3: (props: any) => <h3 className="text-xl font-semibold my-2" {...props} />,
@@ -34,10 +16,24 @@ const mdxComponents = {
   strong: (props: any) => <strong className="font-bold" {...props} />,
   em: (props: any) => <em className="italic" {...props} />,
   a: (props: any) => <a className="text-blue-600 hover:underline" {...props} />,
-};
-
-export default function TimelineMDX({ code }: TimelineMDXProps) {
-  if (!code) return null;
-  const MDXContent = useMDXComponent(code);
-  return <div className="prose prose-lg max-w-full"><MDXContent components={mdxComponents} /></div>;
+  img: (props) => (
+    <Image
+      sizes="100vw"
+      style={{ width: '100%', height: 'auto' }}
+      {...(props as ImageProps)}
+    />
+  ),
+  YouTubeEmbed: ({ videoid, height = 300, className, style, ...props }: any) => {
+      return (
+        <div className={`relative w-[400px] mt-4 ${className ?? ""}`} style={{ paddingBottom: height ? undefined : "56.25%" }}>
+          <RawYouTubeEmbed
+            videoid={videoid}
+          />
+        </div>
+      );
+    },
+} satisfies MDXComponents
+ 
+export function useMDXComponents(): MDXComponents {
+  return components
 }
