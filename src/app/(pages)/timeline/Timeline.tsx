@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-interface TimelineYear {
+export interface TimelineYear {
   year: number
   title: string
   theme: string

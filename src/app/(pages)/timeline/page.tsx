@@ -1,15 +1,16 @@
-import SubBanner from '@/components/ui/SubBanner'
-import { VerticalTimeline } from './Timeline'
-import { allTimelineYears } from 'contentlayer/generated'
+import { getAllTimelineMetadata } from "@/lib/timeline";
+import { VerticalTimeline } from "./Timeline";
+import SubBanner from "@/components/ui/SubBanner";
 
-export default function TimelinePage() {
+export default async function TimelineIndex() {
+  const years = await getAllTimelineMetadata();
   return (
     <div>
-        <SubBanner
+     <SubBanner
             title="Timeline"
             subtitle="A Journey Through Our Light Shows Over the Years"
         />
-          <VerticalTimeline years={allTimelineYears} />
-
+    <VerticalTimeline years={years} />
     </div>
-  )};
+  );
+}
