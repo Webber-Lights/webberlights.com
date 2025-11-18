@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 
 export async function getTimelineFiles() {
-  const timelineDir = path.join(process.cwd(), "data", "timeline");
+  const timelineDir = path.join(process.cwd(), "src", "data", "timeline");
   try {
     const files = await fs.readdir(timelineDir);
     return files.filter((file) => file.endsWith(".mdx")).map((file) => file.replace(".mdx", ""));
@@ -14,7 +14,7 @@ export async function getTimelineFiles() {
 
 export async function getTimelineMetadata(slug: string) {
   try {
-    const module = await import(`@/../data/timeline/${slug}.mdx`);
+    const module = await import(`@/data/timeline/${slug}.mdx`);
     return {
       metadata: { ...module.metadata, slug },
       component: module.default,
