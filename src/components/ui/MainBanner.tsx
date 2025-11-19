@@ -6,7 +6,7 @@ function MainBanner() {
     <div
       className="relative w-full h-150 bg-cover bg-center bg-no-repeat text-center">
        <Image
-        src="/assets/images/2022_Show_Rainbow.jpg"
+        src="/assets/images/2022_Show.jpg"
         alt="Christmas light display"
         fill
         priority

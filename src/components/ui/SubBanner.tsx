@@ -8,7 +8,7 @@ interface SubBannerProps {
 function SubBanner({ title, subtitle, image }: SubBannerProps) {
   const backgroundImage = image
     ? `url(${image})`
-    : `url(/assets/images/2022_Show_Rainbow.jpg)`; // Default image URL
+    : `url(/assets/images/2022_Show.jpg)`; // Default image URL
 
   return (
     <div
