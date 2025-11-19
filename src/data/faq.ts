@@ -2,7 +2,7 @@ export const faqData = [
   {
     id: 1,
     question: "How did you get a radio station to play your music?",
-    answer: "We use a low-power FM radio transmitter, not a commercial radio station. They are often used by drive-in movie theaters/events and by churches to broadcast services to their parking lots (especially during COVID-19). Ours has a practical range of a couple of blocks.",
+    answer: "We use a low-power FM radio transmitter, not a commercial radio station. They are often used by drive-in movie theaters/events and by churches to broadcast services to their parking lots. Ours has a practical range of a couple of blocks.",
     image: "https://res.retekess.com/z_file/20250806/retekes--tr508-fm-broadcast-transmitter-church--1-_20250806095044_4026.jpg?_refresh=1763502672913"
   },
   {
@@ -13,6 +13,6 @@ export const faqData = [
   {
     id: 3,
     question: "Don’t you have a huge electric bill doing this?",
-    answer: "No, we don’t at all. In 2024 our light show used a maximum of about 800W when most of the LEDs are lit up brightly. The controller computers and other electronics use very little power, and the pixels only use power when they are actually lit up. The projector we use for displaying video and “virtual matrix” elements uses more power than all of the LED pixels combined.",
+    answer: "No, we don’t at all. In 2024 our light show used a maximum of about 800W when most of the LEDs are lit up brightly. The controller computers and other electronics use very little power, and the pixels only use power when they are actually lit up.",
   }
 ];
