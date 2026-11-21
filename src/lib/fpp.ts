@@ -1,3 +1,5 @@
+import { cleanSequence } from "@/utils/FPPUtils";
+
 const FPP_URL = process.env.FPP_URL || "http://10.32.60.10";
 
 const fallbackStatus = {
@@ -6,13 +8,8 @@ const fallbackStatus = {
   message: "Unable to connect to FPP device",
 };
 
-const fallbackPlaylist = {
-    "mainPlaylist": [
-      {
-        "sequenceName": "Not-Playing.fseq",
-        "duration": 0
-      }
-    ]
+const fallbackPlaylist: { mainPlaylist: { sequenceName: string; duration: number }[] } = {
+  mainPlaylist: [],
 };
 
 export async function getFppStatus() {
@@ -61,4 +58,19 @@ export async function getFppPlaylist() {
     }
     return fallbackPlaylist;
   }
+}
+
+export interface NowPlaying {
+  isPlaying: boolean;
+  song: string;
+  artist: string;
+}
+
+export async function getNowPlaying(): Promise<NowPlaying> {
+  const status = await getFppStatus();
+  if (status?.status_name === "playing" && status?.current_sequence) {
+    const { song, artist } = cleanSequence(status.current_sequence);
+    return { isPlaying: true, song, artist };
+  }
+  return { isPlaying: false, song: "", artist: "" };
 }
