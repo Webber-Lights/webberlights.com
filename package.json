@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -29,16 +29,16 @@
     "@types/react": "19.1.12",
     "autoprefixer": "^10.5.4",
     "eslint": "9.35.0",
-    "eslint-config-next": "15.5.2",
+    "eslint-config-next": "16.0.3",
     "postcss": "^8.5.25",
     "tailwindcss": "^4.3.3",
     "typescript": "5.9.2"
   },
   "pnpm": {
-  "onlyBuiltDependencies": [
-    "esbuild",
-    "sharp",
-    "unrs-resolver"
-  ]
-}
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
 }

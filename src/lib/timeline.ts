@@ -14,10 +14,10 @@ export async function getTimelineFiles() {
 
 export async function getTimelineMetadata(slug: string) {
   try {
-    const module = await import(`@/data/timeline/${slug}.mdx`);
+    const mod = await import(`@/data/timeline/${slug}.mdx`);
     return {
-      metadata: { ...module.metadata, slug },
-      component: module.default,
+      metadata: { ...mod.metadata, slug },
+      component: mod.default,
     };
   } catch {
     return null;

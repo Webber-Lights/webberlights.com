@@ -1,11 +1,7 @@
 "use client";
-import React from "react";
 import Snowfall from "react-snowfall";
 
-function Layout() {
-  if (typeof document === "undefined") {
-    React.useLayoutEffect = React.useEffect;
-  }
+function SnowFall() {
   return (
     <div>
       <Snowfall
@@ -21,4 +17,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default SnowFall;
