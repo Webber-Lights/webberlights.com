@@ -1,23 +1,27 @@
 import PlaylistTable from "./PlaylistTable";
 import { cleanSequence } from "@/utils/FPPUtils";
-import { getFppStatus, getFppPlaylist } from "@/lib/fpp";
+import { getFppPlaylist, getNowPlaying } from "@/lib/fpp";
+import { secondsToMinutesAndSeconds } from "@/utils/time";
 
 export default async function PlaylistTableWrapper() {
-  const [playlist, status] = await Promise.all([
+  const [playlist, nowPlaying] = await Promise.all([
     getFppPlaylist(),
-    getFppStatus()
+    getNowPlaying(),
   ]);
 
-  let selectedSong = "Not Playing";
+  const rows = (playlist?.mainPlaylist ?? []).map((item) => {
+    const { song, artist } = cleanSequence(item.sequenceName);
+    return {
+      songName: song,
+      songArtist: artist,
+      duration: secondsToMinutesAndSeconds(item.duration),
+    };
+  });
 
-  if (status?.current_sequence) {
-    try {
-      let currentSong = await cleanSequence(status.current_sequence);
-      selectedSong = currentSong.song;
-    } catch (error) {
-      console.error("Error cleaning sequence:", error);
-    }
-  }
-
-  return <PlaylistTable playlist={playlist} selectedSong={selectedSong} />;
+  return (
+    <PlaylistTable
+      rows={rows}
+      selectedSong={nowPlaying.isPlaying ? nowPlaying.song : null}
+    />
+  );
 }

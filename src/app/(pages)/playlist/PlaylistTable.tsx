@@ -1,51 +1,43 @@
 "use client";
-import React, { useState, useEffect } from "react"; // Import React, useState, and useEffect
-import { cleanSequence } from "@/utils/FPPUtils"; // Adjust the path as needed
-import { millisToMinutesAndSeconds } from "@/utils/time"; // Adjust the path as needed
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-interface SongData {
+export interface SongRow {
   songName: string;
   songArtist: string;
   duration: string;
 }
 
-interface PlaylistItem {
-  sequenceName: string;
-  duration: number;
-}
-
 interface PlaylistTableProps {
-  playlist: {
-    mainPlaylist: PlaylistItem[];
-  };
-  selectedSong: string;
+  rows: SongRow[];
+  selectedSong: string | null;
 }
 
-function PlaylistTable({ playlist, selectedSong }: PlaylistTableProps) {
-  const [songRows, setSongRows] = useState<SongData[]>([]);
+const REFRESH_MS = 15_000;
 
+function PlaylistTable({ rows, selectedSong }: PlaylistTableProps) {
+  const router = useRouter();
+
+  // Re-fetch the server data periodically so the "now playing" highlight stays current.
   useEffect(() => {
-    async function generateSongRows() {
-      const rowsPromises = playlist.mainPlaylist.map(async (song) => {
-        const cleanedSequence = await cleanSequence(song.sequenceName);
-        return {
-          songName: cleanedSequence.song,
-          songArtist: cleanedSequence.artist,
-          duration: millisToMinutesAndSeconds(song.duration),
-        };
-      });
+    const id = setInterval(() => {
+      if (document.visibilityState === "visible") router.refresh();
+    }, REFRESH_MS);
+    return () => clearInterval(id);
+  }, [router]);
 
-      const rows = await Promise.all(rowsPromises);
-      setSongRows(rows);
-    }
-
-    generateSongRows();
-  }, [playlist]);
+  if (rows.length === 0) {
+    return (
+      <p className='text-center text-xl opacity-80 my-16 px-4'>
+        Tonight&apos;s playlist isn&apos;t available right now. Check back during show hours!
+      </p>
+    );
+  }
 
   return (
-    <div className='overflow-x-auto rounded-lg mx-10 my-10 lg:mx-40 2xl:mx-80 justify-center'>
+    <div className='overflow-x-auto rounded-lg mx-4 my-10 md:mx-10 lg:mx-40 2xl:mx-80 justify-center'>
       <table className='w-full text-white text-sm text-left'>
-        <thead className='text-xs uppercase bg-red-700 dark:bg-gray-700'>
+        <thead className='text-xs uppercase bg-red-700'>
           <tr>
             <th scope='col' className='py-3 px-6'>
               Song
@@ -59,20 +51,24 @@ function PlaylistTable({ playlist, selectedSong }: PlaylistTableProps) {
           </tr>
         </thead>
         <tbody>
-          {songRows.map(({ songName, songArtist, duration }) => (
-            <tr
-              key={songName}
-              className={
-                songName === selectedSong
-                  ? "font-bold bg-red-600 border-b hover:bg-gray-700"
-                  : "border-b hover:bg-gray-700 bg-green-600"
-              }
-            >
-              <td className='py-4 px-6'>{songName}</td>
-              <td className='py-4 px-6'>{songArtist}</td>
-              <td className='py-4 px-6'>{duration}</td>
-            </tr>
-          ))}
+          {rows.map(({ songName, songArtist, duration }, index) => {
+            const isCurrent = songName === selectedSong;
+            return (
+              <tr
+                key={`${index}-${songName}`}
+                aria-current={isCurrent ? "true" : undefined}
+                className={
+                  isCurrent
+                    ? "font-bold bg-red-600 border-b hover:bg-gray-700"
+                    : "border-b hover:bg-gray-700 bg-green-600"
+                }
+              >
+                <td className='py-4 px-6'>{songName}</td>
+                <td className='py-4 px-6'>{songArtist}</td>
+                <td className='py-4 px-6'>{duration}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

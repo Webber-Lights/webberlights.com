@@ -1,5 +1,6 @@
-export function millisToMinutesAndSeconds(sec) {
-  let minutes = Math.floor(sec / 60);
-  let seconds = Math.round(sec % 60);
-  return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+export function secondsToMinutesAndSeconds(totalSeconds: number) {
+  const rounded = Math.round(totalSeconds);
+  const minutes = Math.floor(rounded / 60);
+  const seconds = rounded % 60;
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
