@@ -16,16 +16,17 @@ const components = {
   strong: (props: any) => <strong className="font-bold" {...props} />,
   em: (props: any) => <em className="italic" {...props} />,
   a: (props: any) => <a className="text-blue-600 hover:underline" {...props} />,
-  img: (props) => (
+  img: ({ alt, ...props }) => (
     <Image
       sizes="100vw"
       style={{ width: '100%', height: 'auto' }}
-      {...(props as ImageProps)}
+      alt={alt ?? ""}
+      {...(props as Omit<ImageProps, "alt">)}
     />
   ),
-  YouTubeEmbed: ({ videoid, height = 300, className, style, ...props }: any) => {
+  YouTubeEmbed: ({ videoid, className }: any) => {
       return (
-        <div className={`relative w-[400px] mt-4 ${className ?? ""}`} style={{ paddingBottom: height ? undefined : "56.25%" }}>
+        <div className={`relative w-full max-w-2xl mt-4 ${className ?? ""}`}>
           <RawYouTubeEmbed
             videoid={videoid}
           />
