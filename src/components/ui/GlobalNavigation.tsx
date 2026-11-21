@@ -38,7 +38,7 @@ const Header = () => {
       url: "/donate",
       active: false,
     },
-  ];
+  ].filter((item) => item.active);
 
   const handleNav = () => {
     setNav(!nav);
@@ -52,22 +52,24 @@ const Header = () => {
         setShadow(false);
       }
     };
-    window.addEventListener("scroll", handleShadow);
+    handleShadow();
+    window.addEventListener("scroll", handleShadow, { passive: true });
+    return () => window.removeEventListener("scroll", handleShadow);
   }, []);
   return (
     <div
       // style={{ backgroundColor: `${navBg}` }}
       className={
         shadow
-          ? "fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-300 bg-[#21252B]  border-b border-grey"
-          : "fixed w-full h-20 z-[100]"
+          ? "relative w-full h-20 shadow-xl ease-in-out duration-300 bg-[#21252B]  border-b border-grey"
+          : "relative w-full h-20"
       }
     >
       <div className='flex justify-between items-center w-full h-full px-6 2xl:px-16'>
         <Link href='/'>
           <Image
             src={NavLogo}
-            alt='/'
+            alt='Webber Lights home'
             width='50'
             height='50'
             className='cursor-pointer rounded-full'
@@ -91,13 +93,15 @@ const Header = () => {
               );
             })}
           </div>
-          <div
-            style={{ color: `#fff` }}
+          <button
+            type='button'
             onClick={handleNav}
-            className='md:hidden'
+            aria-label='Open menu'
+            aria-expanded={nav}
+            className='md:hidden text-white p-1'
           >
             <AiOutlineMenu size={25} />
-          </div>
+          </button>
         </div>
       </div>
 
@@ -119,14 +123,16 @@ const Header = () => {
           <div>
             <div className='flex w-full items-center justify-between'>
               <Link href='/'>
-                <Image src={NavLogo} width='87' height='70' alt='/' />
+                <Image src={NavLogo} width='87' height='70' alt='Webber Lights home' />
               </Link>
-              <div
+              <button
+                type='button'
                 onClick={handleNav}
+                aria-label='Close menu'
                 className='rounded-full shadow-md shadow-gray-400 p-3 cursor-pointer'
               >
                 <AiOutlineClose />
-              </div>
+              </button>
             </div>
             <div className='border-b border-gray-300 my-4'></div>
           </div>
