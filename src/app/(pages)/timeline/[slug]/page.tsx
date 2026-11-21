@@ -18,6 +18,16 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const result = await getTimelineMetadata(slug);
+  const metadata: Metadata | undefined = result?.metadata;
+  return {
+    title: metadata?.title ?? "Show Timeline",
+    openGraph: metadata?.featuredImage ? { images: [metadata.featuredImage] } : undefined,
+  };
+}
+
 // Only allow existing static params
 export const dynamicParams = false;
 

@@ -4,6 +4,13 @@ import { BiLogoPaypal, BiLogoVenmo } from "react-icons/bi";
 import { AiFillCreditCard } from "react-icons/ai";
 import { FaGooglePay, FaApplePay } from "react-icons/fa";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Donate",
+  description: "Help support Webber Lights.",
+};
+
 export default function Home() {
   return (
     <div>
