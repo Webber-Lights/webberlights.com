@@ -20,7 +20,7 @@ function MainBanner() {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-4">
         <h1 className="text-4xl md:text-7xl mb-3 font-bold">Webber Lights</h1>
         <p className="text-base md:text-xl mb-6 font-medium">
-          Synchronized Christmas Light Display in Cumberland, RI
+          Award-Winning Synchronized Christmas Light Show in Cumberland, RI
         </p>
       </div>
 
